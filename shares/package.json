@@ -1,0 +1,21 @@
+{
+  "name": "shares",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc -p .",
+    "prettier:check": "prettier --check ./src",
+    "prettier:format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.5"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2"
+  }
+}
