@@ -19,9 +19,7 @@ interface AuthAttributes {
 
 export interface AuthInput extends Optional<AuthAttributes, "id"> {}
 
-export class Auth
-  extends Model<AuthAttributes, AuthInput>
-  implements AuthAttributes
+export class Auth extends Model implements AuthAttributes
 {
   public id!: string;
   public name!: string;

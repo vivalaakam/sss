@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { createHash } from "crypto";
 import { Storage } from "./models/storage";
 import { decrypt, encrypt, PrivateKey } from "eciesjs";
+import { keccak256 } from "shared";
 
 dotenv.config();
 
@@ -22,18 +23,13 @@ function authMiddleware(
   res: Response,
   next: NextFunction,
 ) {
-  const { token } = req.body;
-
-  const encoded = jwt.decode(token);
+  const encoded = jwt.decode(req.body.token);
 
   if (encoded === null || !encoded.hasOwnProperty("sub")) {
     return res.status(400).json({ message: "Invalid token" });
   }
 
-  req.uid = createHash("sha256")
-    .update(Buffer.from(encoded.sub as string, "utf-8"))
-    .update(Buffer.from(process.env.AUTH_SECRET as string, "utf-8"))
-    .digest();
+  req.uid = keccak256(encoded.sub as string, , process.env.AUTH_SECRET as string);
 
   next();
 }
